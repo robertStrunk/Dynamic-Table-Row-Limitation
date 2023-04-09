@@ -63,5 +63,14 @@ Even thought the above is following best practices, the output is not well forme
     </tbody>
 </table>
 ```
+Notice the `<c-child-component>` elements are the children of the `tbody` elements. That is not part of the (html table specification)[https://html.spec.whatwg.org/multipage/tables.html#the-table-element].
 The cause is related to how the LWC engine performs rendering and is outside the scope of this issue. 
 
+For basic use cases, this is an easy problem to solve. All you need to do is modify the `HTMLElement.stle.display` property to be `table-row` as shown below:
+
+```css
+/* childComponent.css */
+:host {
+    display: table-row;
+}
+```
