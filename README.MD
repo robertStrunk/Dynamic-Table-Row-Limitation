@@ -1,4 +1,4 @@
-###This document highlights a major limitation faced when creating dynamic table rows in LWC.
+### This document highlights a major limitation faced when creating dynamic table rows in LWC.
 
 By dynamic table rows, I am referring to a scenario where you are iterating over a collection with the intent of creating a `<tr>` for every item in the collection. 
 
@@ -71,7 +71,7 @@ Even though the above is following best practices, the output is not well formed
     </tbody>
 </table>
 ```
-Notice the `<c-child-component>` elements are the children of the `tbody` element. That is not part of the [html table specification](https://html.spec.whatwg.org/multipage/tables.html#the-table-element).
+Notice the `<c-child-component>` elements are the children of the `tbody` element. That is not part of the [html table specification](https://html.spec.whatwg.org/multipage/tables.html#the-table-element) and thus is not handled by the browser in the way we expect (no matter how bad we really want it to :-) ).
 
 The cause is related to how the LWC engine performs rendering and is outside the scope of this issue. 
 
