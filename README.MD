@@ -1,4 +1,4 @@
-This document highlights a major limitation faced when creating dynamic table rows in LWC. By dynamic table rows, I am referring to a scenario where you are iterating over a collection with the intent of creating a <tr> for every item in the collection. 
+This document highlights a major limitation faced when creating dynamic table rows in LWC. By dynamic table rows, I am referring to a scenario where you are iterating over a collection with the intent of creating a `<tr>` for every item in the collection. 
 
 Before we talk dynamic table rows, lets first establish a baseline understanding of a critical best practice when working with iterations in LWC. 
 
@@ -63,10 +63,10 @@ Even thought the above is following best practices, the output is not well forme
     </tbody>
 </table>
 ```
-Notice the `<c-child-component>` elements are the children of the `tbody` elements. That is not part of the (html table specification)[https://html.spec.whatwg.org/multipage/tables.html#the-table-element].
+Notice the `<c-child-component>` elements are the children of the `tbody` elements. That is not part of the [html table specification](https://html.spec.whatwg.org/multipage/tables.html#the-table-element).
 The cause is related to how the LWC engine performs rendering and is outside the scope of this issue. 
 
-For basic use cases, this is an easy problem to solve. All you need to do is modify the `HTMLElement.stle.display` property to be `table-row` as shown below:
+For basic use cases, this is an easy problem to solve. All you need to do is modify the `HTMLElement.style.display` property to be `table-row` as shown below:
 
 ```css
 /* childComponent.css */
@@ -74,3 +74,7 @@ For basic use cases, this is an easy problem to solve. All you need to do is mod
     display: table-row;
 }
 ```
+
+This css rule notifies the browser to the the `<c-child-component>` elements as standard `<tr>` elements.
+
+That solution, however, does not work for recursive scenarios. For more info on that, please refer to my [stack exchange post](https://salesforce.stackexchange.com/questions/399873/lwc-table-with-dynamic-rows-from-tree-data).
