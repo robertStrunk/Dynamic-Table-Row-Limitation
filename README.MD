@@ -2,7 +2,7 @@
 
 By dynamic table rows, I am referring to a scenario where you are iterating over a collection with the intent of creating a `<tr>` for every item in the collection. 
 
-Before we talk dynamic table rows, lets first establish a baseline understanding of a critical best practice when working with iterations in LWC. 
+Before we talk dynamic table rows, let's first establish a baseline understanding of a critical best practice when working with iterations in LWC. 
 
 It is considered a best practice to use child components when iterating collections in LWC markup.
 For example:
@@ -47,7 +47,7 @@ For example:
     </tbody>
 </table>
 ```
-Even though the above is following best practices, the output is not well formed HTML and does not get handled by the browser properly.
+Even though the above is following best practices, the output is not well-formed HTML and does not get handled by the browser properly.
 ```html
 <!-- Resulting HTML -->
 <table>
