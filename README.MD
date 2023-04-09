@@ -73,7 +73,7 @@ Even though the above is following best practices, the output is not well-formed
 ```
 Notice the `<c-child-component>` elements are the children of the `tbody` element. That is not part of the [html table specification](https://html.spec.whatwg.org/multipage/tables.html#the-table-element) and thus is not handled by the browser in the way we expect (no matter how bad we really want it to :laughing:).
 
-The cause is related to how the LWC engine performs rendering and is outside the scope of this issue. 
+The cause is related to how the LWC engine performs rendering and is outside the scope of this topic. 
 
 For basic use cases, this is an easy problem to solve. All you need to do is modify the `HTMLElement.style.display` property to be `table-row` as shown below:
 
