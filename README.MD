@@ -2,7 +2,8 @@ This document highlights a major limitation faced when creating dynamic table ro
 
 Before we talk dynamic table rows, lets first establish a baseline understanding of a critical best practice when working with iterations in LWC. 
 
-It is considered a best practice to use child components when iterating collections in LWC markup. For example:
+It is considered a best practice to use child components when iterating collections in LWC markup.
+For example:
 
 ```html
 <!-- Best Practice -->
@@ -10,7 +11,7 @@ It is considered a best practice to use child components when iterating collecti
     <c-child-component key={element.Id} item={element}></c-child-component>
 </template>
 ```
-is the correct approach compared to
+is the correct approach compared to:
 
 ```html
 <!-- ANTI PATTERN -->
@@ -23,3 +24,44 @@ is the correct approach compared to
 ```
 
 A problem arises, however, when you are dealing with html tables. 
+For example:
+
+```html
+<table>
+    <thead>
+        <th>Column 1</th>
+        <th>Column 2</th>
+    </thead>
+    <tbody>
+        <template for:each={collection} for:item="element">
+            <c-child-component key={element.Id} item={element}></c-child-component>
+        </template>
+    </tbody>
+</table>
+```
+Even thought the above is following best practices, the output is not well formed HTML and does not get handled by the browser properly.
+```html
+<!-- Resulting HTML -->
+<table>
+    <thead>
+        <th>Column 1</th>
+        <th>Column 2</th>
+    </thead>
+    <tbody>
+        <c-child-component>
+            <tr>
+                <td>some_text_here</td>
+                <td>some_text_here</td>
+            </tr>
+        </c-child-component>
+        <c-child-component>
+            <tr>
+                <td>some_text_here</td>
+                <td>some_text_here</td>
+            </tr>
+        </c-child-component>
+    </tbody>
+</table>
+```
+The cause is related to how the LWC engine performs rendering and is outside the scope of this issue. 
+
